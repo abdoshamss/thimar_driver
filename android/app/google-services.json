@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "780764168757",
+    "project_id": "thimar-driver-21242",
+    "storage_bucket": "thimar-driver-21242.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780764168757:android:06b2e3a7583c4979fd677c",
+        "android_client_info": {
+          "package_name": "com.alalmiya.thimar_driver"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0AL6y6YKMxBv351KW1W41wMR3iob9Lxg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

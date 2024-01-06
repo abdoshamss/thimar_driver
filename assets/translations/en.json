@@ -1,0 +1,207 @@
+{
+  "lang": "en",
+  "r_s": "R.S",
+  "price": "price",
+  "please_add_some_producst_to_favs": "Please add some products to your favorites",
+  "login_first": "Login first",
+  "cancel": "Cancel",
+  "no_internet": "Internet not found",
+  "join_us": "Join us to view all services",
+
+  "log_in": {
+    "hello_again": "Hello again",
+    "you_can_login_now": "You can log in now",
+    "please_enter_your_mobile_number": "Please enter your mobile number",
+    "please_enter_your_password_again": "Please enter your password again",
+    "please_enter_nine_number": "Please enter 9 numbers",
+    "please_enter_six_letters_at_min": "Please enter 6 letters at min",
+    "phone_number": "Phone Number",
+    "password": "Password",
+    "forget_password": "Forget Password ?",
+    "login_as_visitor": "Log in as a visitor",
+    "dont_have_an_account": "Don't have an account?",
+    "register_now": "  Register Now  "
+  },
+  "forget_password": {
+    "forget_password": "Forget Password",
+    "enter_your_phone_number": "Enter the mobile number associated with your account",
+    "confirm_phone_number": "Confirm phone number",
+    "you_have_an_account": "You have an account ?"
+  },
+  "my_account": {
+    "my_account": "My Account",
+    "user_name": "User Name",
+    "personal_data": "Personal Info",
+    "wallet": "Wallet",
+    "addresses": "Addresses",
+    "faqs": "FAQS",
+    "policy": "Policy",
+    "call_us": "Call us",
+    "complaints": "Complaints and suggestions",
+    "share_app": "Share app",
+    "about_app": "About App",
+    "terms": "Terms",
+    "change_language": "Change Language",
+    "rate_app": "Rate App",
+    "log_out": "Log Out",
+    "log_in": "Login"
+  },
+  "check_code": {
+    "enter_the_code_4digits": "Enter the 4-digit code sent to your mobile number",
+    "change_phone_number": "Change phone number",
+    "enter_the_code": "Enter the code",
+    "confirm_the_code": "Confirm the code",
+    "didnt_receive_code": "Didn't receive the code?",
+    "you_can_receive_code_after": "You can resend the code after",
+    "resend": "Resend"
+  },
+  "reset_password": {
+    "enter_new_password": "Enter new password",
+    "please_enter_new_password_in_6_letters_at_min": "Please enter a new password of 6 characters",
+    "new_password": "New password",
+    "please_enter_new_password_again": "Please enter the new password again",
+    "confirm_new_password": "Confirm new password",
+    "change_password": "Change password"
+  },
+  "register": {
+    "hello_again": "Hello again",
+    "you_can_register_new_account_now": "You can register a new account now",
+    "please_enter_full_name": "Please enter your full name",
+    "user_name": "User name",
+    "city": "City",
+    "choose_your_city": "Choose your city",
+    "please_enter_your_city": "Please enter your city",
+    "register": "Register",
+    "confirm_password": "Confirm password",
+    "something_wrong": "SomeThing Wrong"
+  },
+  "account_activation": {
+    "activate_account": "Activate the account"
+  },
+  "home": {
+    "write_search_word": "Enter a word to search",
+    "search_about_you_want": "Search about you want?",
+    "data_not_found": "Data not found",
+    "categories": "Categories",
+    "items": "Items",
+    "your_city": "Your city",
+    "thamara_basket": "Thimar Basket",
+    "delivery_to": "Delivery to",
+    "addresses": "Addresses",
+    "address": "Address",
+    "add_addresses": "Add Addresses"
+  },
+  "profile": {
+    "select_image_from": "Select an image from",
+    "gallery": "Gallery",
+    "camera": "Camera",
+    "edit_data": "Edit Data",
+    "please_add_photo": "Please Add photo"
+  },
+  "wallet": {
+    "see_more": "See More",
+    "charge_now": "Charge Now",
+    "your_balance": "Your Balance",
+    "history_transactions": "History Transactions"
+  },
+  "change_password": {
+    "change_password": "Change Password",
+    "please_enter_your_old_password_again_at_least_six_letters": "Please enter your old password in 6 letters at min",
+    "old_password": "Old Password",
+    "two_passwords_not_matching": "two passwords not matching"
+  },
+  "add_to_cart": "Add to Cart",
+  "out_of_stock": "Out of stock",
+  "search_about_you_want": "Search about you want ?",
+  "type_word_to_search": "Type a word to search",
+  "charge_now": {
+    "amount_information": "Amount Information",
+    "your_amount": "Your amount",
+    "card_information": "Card Information",
+    "name": "name",
+    "card_credit_number": "Credit Card Number",
+    "expiry_date": "Expiry date",
+    "serial_number": "serial number",
+    "pay": "Pay"
+  },
+  "addresses": {
+    "work": "work",
+    "home": "home",
+    "address": "Address",
+    "add_address": "Add Address",
+    "address_type": "Address Type",
+    "description": "Description",
+    "please_enter_description": "Please enter the description"
+  },
+  "contact_us": {
+    "or_you_can_send_message": "Or you can send a message",
+    "please_enter_content": "Please enter the subject",
+    "subject": "subject",
+    "send": "Send"
+  },
+  "give_advice": {
+    "please_enter_content_title": "Please enter a title for the topic",
+    "content_title": "Title of the topic"
+  },
+  "home_nav": {
+    "main_page": "Home",
+    "my_orders": "My Orders",
+    "notifications": "Notifications",
+    "favs": "Favs",
+    "my_account": "My Account"
+  },
+  "orders": {
+    "order": "Order",
+    "order_details": "Order Details",
+    "order_summary": "Order Summary",
+    "total_products": "Total Products",
+    "discount": "Discount",
+    "total_after_discount": "Total after discount",
+    "delivery_price": "Delivery Price",
+    "special_dicount": "Special customer discount",
+    "total": "Total",
+    "paid_by": "Paid by",
+    "delivery_address": "Delivery Address"
+  },
+  "categories": {
+    "filter": "Filter",
+    "sort": "Sort by",
+    "from_min_to_high": "From lowest price to highest",
+    "from_high_to_min": "From highest price to lowest",
+    "apply": "Apply"
+  },
+  "product_details": {
+    "product_details": "Product Details",
+    "product_code": "Product code",
+    "ratings": "Ratings",
+    "similar_products": "Similar products",
+    "add_to_cart": "Add to cart",
+    "product_added_to_cart":"The product has been added successfully",
+    "amount": "Amount",
+    "go_to_cart": "go to cart",
+    "browse_offers":"Browse Offers"
+  },
+  "cart": {
+    "cart": "Cart",
+    "add_some_products_to_cart": "Add some products to the cart",
+    "you_have_coupon": "Do you have a coupon? Enter the coupon number",
+    "all_prices": "All prices include 15% value added tax",
+"move_to_complete_order": "Move to complete the order"
+
+  },
+  "complete_order": {
+    "complete_order": "Complete Order",
+    "phone": "Phone",
+"choose_the_delivery_address":"Choose the delivery address",
+    "place": "Place",
+"delivery_time":"Determine delivery time",
+    "choose_date_and_day": "Choose date and day",
+    "choose_time": "Choose Time",
+    "notes_and_instructions":"Notes and instructions",
+"choose_payment_way": "Choose payment way",
+    "cash": "Cash",
+    "finish_order":"Finish Order",
+"thank_you": "Thank you, your request has been completed successfully",
+"you_can_follow": "You can follow the status of the request or return to the main page"
+  }
+}
