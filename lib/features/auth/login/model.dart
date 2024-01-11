@@ -7,7 +7,7 @@ class UserData {
   UserData.fromJson(Map<String, dynamic> json) {
     list = UserModel.fromJson(json['data'] ?? []);
     status = json['status'] ?? "";
-    message = json['message'] ;
+    message = json['message']??"" ;
   }
 }
 
@@ -37,7 +37,7 @@ class UserModel {
     userType = json['user_type']??"";
     token = json['token']??"";
 
-    city = City.fromJson(json['city']);
+    city = City.fromJson(json['city']??{});
     identityNumber = json['identity_number']??"";
     userCartCount = json['user_cart_count']??0;
   }

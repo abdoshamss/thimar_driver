@@ -8,8 +8,8 @@ part 'states.dart';
 part 'events.dart';
 
 class CheckCodeBloc extends Bloc<CheckCodeEvents,CheckCodeStates> {
-  final DioHelper dioHelper;
-  CheckCodeBloc(this.dioHelper) : super(CheckCodeStates()){
+  final DioHelper _dioHelper;
+  CheckCodeBloc(this._dioHelper) : super(CheckCodeStates()){
     on<PostCheckCodeDataEvent>(_postData);
   }
   final codeController = TextEditingController();
@@ -20,7 +20,7 @@ class CheckCodeBloc extends Bloc<CheckCodeEvents,CheckCodeStates> {
       'code': codeController.text,
       'phone': event.phone,
     };
-    final response = await dioHelper.post("check_code", data: map);
+    final response = await _dioHelper.post("check_code", data: map);
     if (response.isSuccess) {
       emit(CheckCodeSuccessState(message: "تم التحقق بنجاح", context: event.context));
     } else {

@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:thimar_driver/core/logic/pusher.dart';
+import 'package:thimar_driver/core/widgets/pusher.dart';
 import 'package:thimar_driver/features/auth/resend_code/bloc.dart';
 import 'package:thimar_driver/screens/auth/forget_password.dart';
 import 'package:thimar_driver/screens/auth/reset_password.dart';
@@ -18,8 +18,7 @@ import 'login.dart';
 class CheckCodeScreen extends StatefulWidget {
   final String pageName, phone;
 
-  const CheckCodeScreen({Key? key, required this.pageName, required this.phone})
-      : super(key: key);
+  const CheckCodeScreen({super.key, required this.pageName, required this.phone});
 
   @override
   State<CheckCodeScreen> createState() => _CheckCodeScreenState();

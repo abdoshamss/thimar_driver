@@ -16,7 +16,7 @@ import 'core/logic/cache_helper.dart';
 
 import 'generated/codegen_loader.g.dart';
 
-  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +28,7 @@ void main() async {
     print("My Fcm Token Is");
     print(value.toString());
   });
+
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: getMaterialColor(primaryColor.value),
   ));
@@ -36,11 +37,13 @@ void main() async {
   ]);
   initKiwi();
   await CacheHelper.init();
+
   await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(
-        supportedLocales: const [Locale('en'), Locale('ar')],
+        supportedLocales: const [ Locale('ar'),Locale('en')],
         saveLocale: true,
+
         startLocale: const Locale('ar'),
         path: 'assets/translations',
         assetLoader: const CodegenLoader(),
@@ -71,7 +74,7 @@ class MyApp extends StatelessWidget {
               data: MediaQuery.of(context).copyWith(textScaleFactor: 1.sp),
               child: UnFocus(
                 child: Directionality(
-                    textDirection: mat.TextDirection.rtl , child: child!),
+                    textDirection:CacheHelper.getLanguage()=="ar"? mat.TextDirection.rtl:mat.TextDirection.ltr, child: child!),
               ));
         },
         theme: theme,

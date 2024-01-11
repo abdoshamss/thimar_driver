@@ -10,8 +10,8 @@ part 'states.dart';
 part 'events.dart';
 
 class ForgetPasswordBloc extends Bloc<ForgetPasswordEvents,ForgetPasswordStates> {
-  final DioHelper dioHelper;
-  ForgetPasswordBloc(this.dioHelper) : super(ForgetPasswordStates()){
+  final DioHelper _dioHelper;
+  ForgetPasswordBloc(this._dioHelper) : super(ForgetPasswordStates()){
     on<PostForgetPasswordDataEvent>(_postData);
   }
 
@@ -20,7 +20,7 @@ class ForgetPasswordBloc extends Bloc<ForgetPasswordEvents,ForgetPasswordStates>
   Future<void> _postData(PostForgetPasswordDataEvent event,Emitter<ForgetPasswordStates>emit) async {
     emit(ForgetPasswordLoadingState());
 
-    final response = await dioHelper.post("forget_password", data: {
+    final response = await _dioHelper.post("forget_password", data: {
       "phone":phoneController.text
     });
 

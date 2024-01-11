@@ -37,3 +37,16 @@
 // ios       1:780764168757:ios:91162b64c88dc1d1fd677c
 // macos     1:780764168757:ios:ada4a7809b1791d3fd677c
 
+
+// echo "# thimar_driver" >> README.md
+// git init
+// git add README.md
+// git commit -m "first commit"
+// git branch -M main
+// git remote add origin https://github.com/abdoshamss/thimar_driver.git
+// git push -u origin main
+
+
+// git remote add origin https://github.com/abdoshamss/thimar_driver.git
+// git branch -M main
+// git push -u origin main

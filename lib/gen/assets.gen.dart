@@ -44,12 +44,18 @@ class $AssetsIconsGen {
   AssetGenImage get backHome =>
       const AssetGenImage('assets/icons/back_home.png');
 
+  /// File path: assets/icons/bank.png
+  AssetGenImage get bank => const AssetGenImage('assets/icons/bank.png');
+
   /// File path: assets/icons/calender.png
   AssetGenImage get calender =>
       const AssetGenImage('assets/icons/calender.png');
 
   /// File path: assets/icons/call.png
   AssetGenImage get call => const AssetGenImage('assets/icons/call.png');
+
+  /// File path: assets/icons/car.png
+  AssetGenImage get car => const AssetGenImage('assets/icons/car.png');
 
   /// File path: assets/icons/cart.png
   AssetGenImage get cart => const AssetGenImage('assets/icons/cart.png');
@@ -78,6 +84,9 @@ class $AssetsIconsGen {
   AssetGenImage get editAddress =>
       const AssetGenImage('assets/icons/edit_address.png');
 
+  /// File path: assets/icons/email.png
+  AssetGenImage get email => const AssetGenImage('assets/icons/email.png');
+
   /// File path: assets/icons/favs_home.png
   AssetGenImage get favsHome =>
       const AssetGenImage('assets/icons/favs_home.png');
@@ -94,11 +103,22 @@ class $AssetsIconsGen {
   /// File path: assets/icons/info.png
   AssetGenImage get info => const AssetGenImage('assets/icons/info.png');
 
+  /// File path: assets/icons/ipan.png
+  AssetGenImage get ipan => const AssetGenImage('assets/icons/ipan.png');
+
   /// File path: assets/icons/log_out.png
   AssetGenImage get logOut => const AssetGenImage('assets/icons/log_out.png');
 
   /// File path: assets/icons/mark.png
   AssetGenImage get mark => const AssetGenImage('assets/icons/mark.png');
+
+  /// File path: assets/icons/mark_home.png
+  AssetGenImage get markHome =>
+      const AssetGenImage('assets/icons/mark_home.png');
+
+  /// File path: assets/icons/mark_register.png
+  AssetGenImage get markRegister =>
+      const AssetGenImage('assets/icons/mark_register.png');
 
   /// File path: assets/icons/mastercard.png
   AssetGenImage get mastercard =>
@@ -168,6 +188,10 @@ class $AssetsIconsGen {
   AssetGenImage get userHome =>
       const AssetGenImage('assets/icons/user_home.png');
 
+  /// File path: assets/icons/user_register.png
+  AssetGenImage get userRegister =>
+      const AssetGenImage('assets/icons/user_register.png');
+
   /// File path: assets/icons/vip.png
   AssetGenImage get vip => const AssetGenImage('assets/icons/vip.png');
 
@@ -188,8 +212,10 @@ class $AssetsIconsGen {
         arrowVarRed,
         back,
         backHome,
+        bank,
         calender,
         call,
+        car,
         cart,
         cartHome,
         check,
@@ -198,13 +224,17 @@ class $AssetsIconsGen {
         dollar,
         edit,
         editAddress,
+        email,
         favsHome,
         filter,
         flag,
         home,
         info,
+        ipan,
         logOut,
         mark,
+        markHome,
+        markRegister,
         mastercard,
         message,
         minus,
@@ -225,6 +255,7 @@ class $AssetsIconsGen {
         tickSquare,
         user,
         userHome,
+        userRegister,
         vip,
         visaPay,
         wallet
@@ -233,6 +264,10 @@ class $AssetsIconsGen {
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
+
+  /// File path: assets/images/drawer_background.png
+  AssetGenImage get drawerBackground =>
+      const AssetGenImage('assets/images/drawer_background.png');
 
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
@@ -256,9 +291,38 @@ class $AssetsImagesGen {
   AssetGenImage get topLeaves =>
       const AssetGenImage('assets/images/top_leaves.png');
 
+  /// File path: assets/images/upload_photo.png
+  AssetGenImage get uploadPhoto =>
+      const AssetGenImage('assets/images/upload_photo.png');
+
+  /// File path: assets/images/visa.png
+  AssetGenImage get visa => const AssetGenImage('assets/images/visa.png');
+
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [logo, mainLogo, saudi, sideLeaves, splashBackground, topLeaves];
+  List<AssetGenImage> get values => [
+        drawerBackground,
+        logo,
+        mainLogo,
+        saudi,
+        sideLeaves,
+        splashBackground,
+        topLeaves,
+        uploadPhoto,
+        visa
+      ];
+}
+
+class $AssetsTranslationsGen {
+  const $AssetsTranslationsGen();
+
+  /// File path: assets/translations/ar.json
+  String get ar => 'assets/translations/ar.json';
+
+  /// File path: assets/translations/en.json
+  String get en => 'assets/translations/en.json';
+
+  /// List of all assets
+  List<String> get values => [ar, en];
 }
 
 class Assets {
@@ -266,6 +330,7 @@ class Assets {
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsTranslationsGen translations = $AssetsTranslationsGen();
 }
 
 class AssetGenImage {

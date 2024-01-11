@@ -3,12 +3,14 @@ import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:thimar_driver/core/logic/pusher.dart';
+import 'package:thimar_driver/core/logic/cache_helper.dart';
+import 'package:thimar_driver/core/widgets/pusher.dart';
 import 'package:thimar_driver/gen/assets.gen.dart';
 import 'package:thimar_driver/screens/auth/login.dart';
+import 'package:thimar_driver/screens/home/view.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -19,7 +21,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      pushAndRemoveUntil(const LoginScreen(),c: context);
+      if (CacheHelper.getToken() == null) {
+        push(const LoginScreen(), c: context);
+      } else {
+        pushAndRemoveUntil(HomeNavBarScreen(), c: context);
+      }
     });
   }
 

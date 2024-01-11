@@ -1,20 +1,22 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart';
-import 'package:thimar_driver/core/logic/pusher.dart';
+import 'package:thimar_driver/core/widgets/pusher.dart';
 import 'package:thimar_driver/core/res/color.dart';
 import 'package:thimar_driver/core/widgets/app_button.dart';
 import 'package:thimar_driver/core/widgets/app_input.dart';
 import 'package:thimar_driver/features/auth/login/bloc.dart';
 import 'package:thimar_driver/screens/auth/forget_password.dart';
-import 'package:thimar_driver/screens/auth/register.dart';
+import 'package:thimar_driver/screens/auth/register_user.dart';
 
 import '../../gen/assets.gen.dart';
+import '../../generated/locale_keys.g.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -49,10 +51,10 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    push(const RegisterScreen());
+                    push(const RegisterUserScreen());
                   },
                   child: Text(
-                    "مرحبا بك مرة أخرى",
+                    LocaleKeys.log_in_hello_again.tr(),
                     style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontSize: 16.sp,
@@ -63,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 8.h,
                 ),
                 Text(
-                  "يمكنك تسجيل الدخول الأن",
+                  LocaleKeys.log_in_you_can_login_now.tr(),
                   style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w400,
@@ -155,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         TextSpan(
                           recognizer: TapGestureRecognizer()
                             ..onTap =
-                                () => push(const RegisterScreen(), c: context),
+                                () => push(const RegisterUserScreen(), c: context),
                           text: "تسجيل الأن",
                           style: const TextStyle(
                             fontWeight: FontWeight.w800,

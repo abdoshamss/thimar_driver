@@ -3,26 +3,41 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thimar_driver/gen/assets.gen.dart';
 
-enum InputType { normal, phone, password }
+enum InputType { normal, phone, password, search, city }
 
 class AppInput extends StatefulWidget {
   final TextEditingController controller;
   final InputType inputType;
-  final String prefixIcon;
-  final String labelText;
-  final bool enable;
+  final String? prefixIcon, labelText, hintText,value;
+
+  final bool saudiIcon;
+  final ValueChanged<String>? onChanged;
   final GestureTapCallback? onTap;
-  final FormFieldValidator validator;
-  const AppInput(
-      {Key? key,
-      required this.controller,
-      this.inputType = InputType.normal,
-      required this.prefixIcon,
-      required this.labelText,
-      required this.validator,
-      this.enable = true,
-      this.onTap})
-      : super(key: key);
+  final VoidCallback? onPressed;
+
+  final FormFieldValidator? validator;
+  final TextInputAction? textInputAction;
+  final bool backgroundColor, arrow;
+  final int maxLines;
+
+  const AppInput({
+    super.key,
+    required this.controller,
+    this.inputType = InputType.normal,
+    this.prefixIcon,
+    this.validator,
+    this.labelText,
+    this.hintText,
+    this.onTap,
+    this.onChanged,
+    this.textInputAction,
+    this.backgroundColor = false,
+    this.saudiIcon = true,
+    this.onPressed,
+    this.value,
+    this.maxLines = 1,
+    this.arrow = false,
+  });
 
   @override
   State<AppInput> createState() => _AppInputState();
@@ -37,7 +52,7 @@ class _AppInputState extends State<AppInput> {
       padding: EdgeInsets.only(bottom: 16.h),
       child: Row(
         children: [
-          if (widget.inputType == InputType.phone)
+          if (widget.inputType == InputType.phone && widget.saudiIcon)
             Container(
               width: 70.w,
               height: 60.h,
@@ -72,12 +87,19 @@ class _AppInputState extends State<AppInput> {
             width: 8.w,
           ),
           SizedBox(
-            width: widget.inputType == InputType.phone ? 265.w : 335.w,
+            width: widget.inputType == InputType.city&& widget.value!.isNotEmpty
+                ? 275.w
+                : widget.inputType == InputType.phone && widget.saudiIcon
+                    ? 265.w
+                    : 335.w,
             child: TextFormField(
-              enabled: widget.enable,
+              onChanged: widget.onChanged,
+              readOnly: widget.onTap != null,
               onTap: widget.onTap,
               validator: widget.validator,
+              maxLines: widget.maxLines,
               controller: widget.controller,
+              textInputAction: widget.textInputAction,
               keyboardType: widget.inputType == InputType.phone
                   ? TextInputType.phone
                   : TextInputType.text,
@@ -85,23 +107,44 @@ class _AppInputState extends State<AppInput> {
                   ? [FilteringTextInputFormatter.allow(RegExp("[0-9]+"))]
                   : [],
               decoration: InputDecoration(
-                  suffixIcon: widget.inputType == InputType.password
-                      ? GestureDetector(
-                          onTap: () {
-                            _isShow = !_isShow;
-                            setState(() {});
-                          },
-                          child: Icon(_isShow
-                              ? Icons.visibility_off_rounded
-                              : Icons.visibility_rounded),
-                        )
+                  filled: true,
+                  fillColor: widget.inputType == InputType.search ||
+                          widget.backgroundColor
+                      ? const Color(0xffFAFFF5)
+                      : Colors.white,
+                  suffixIcon: widget.arrow
+                      ?   Icon(Icons.arrow_back_ios_new_outlined,color: Theme.of(context).primaryColor,size: 15,)
+                      : widget.inputType == InputType.password
+                          ? GestureDetector(
+                              onTap: () {
+                                _isShow = !_isShow;
+                                setState(() {});
+                              },
+                              child: Icon(_isShow
+                                  ? Icons.visibility_off_rounded
+                                  : Icons.visibility_rounded),
+                            )
+                          : null,
+                  prefixIcon: widget.prefixIcon != null
+                      ? Image.asset(widget.prefixIcon!)
                       : null,
-                  prefixIcon: Image.asset(widget.prefixIcon),
                   labelText: widget.labelText,
+                  hintText: widget.hintText,
                   labelStyle: const TextStyle(color: Color(0xffB1B1B1))),
               obscureText: !_isShow && widget.inputType == InputType.password,
             ),
           ),
+          if (widget.inputType == InputType.city&& widget.value!.isNotEmpty)
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
+              child: IconButton(
+                  onPressed: widget.onPressed,
+                  icon: const Icon(
+                    Icons.close,
+                    color: Colors.red,
+                    size: 26,
+                  )),
+            ),
         ],
       ),
     );

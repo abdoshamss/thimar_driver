@@ -8,6 +8,7 @@ class DioHelper {
     headers: {
       "Accept": "application/json",
     },
+    connectTimeout: const Duration(seconds: 5),
   ));
 
   Future<CustomResponse> post(String endPoint,
@@ -18,9 +19,9 @@ class DioHelper {
           data: FormData.fromMap(data ?? {}),
           options: Options(
             headers: {
-              "Accept": "application/json",
               "Authorization": "Bearer ${CacheHelper.getToken()}",
-              "Accept-Language": "ar"
+              "Accept-Language": CacheHelper.getLanguage() == "ar" ? "ar" : "en",
+              "Accept": "application/json",
             },
           ));
       print(response.data);
@@ -47,9 +48,9 @@ class DioHelper {
           queryParameters: params,
           options: Options(
             headers: {
-              "Accept": "application/json",
               "Authorization": "Bearer ${CacheHelper.getToken()}",
-              "Accept-Language": "ar"
+              "Accept-Language": CacheHelper.getLanguage() == "ar" ? "ar" : "en",
+              "Accept": "application/json",
             },
           ));
       print(response.data);

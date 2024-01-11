@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart';
-import 'package:thimar_driver/core/logic/pusher.dart';
+import 'package:thimar_driver/core/widgets/pusher.dart';
 import 'package:thimar_driver/core/widgets/app_input.dart';
 import 'package:thimar_driver/features/auth/reset_password/bloc.dart';
 
@@ -13,8 +13,7 @@ import 'login.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
   final String phone, code;
-  const ResetPasswordScreen({Key? key, required this.phone, required this.code})
-      : super(key: key);
+  const ResetPasswordScreen({super.key, required this.phone, required this.code});
 
   @override
   State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();

@@ -12,6 +12,7 @@ final ThemeData theme=ThemeData(
   appBarTheme: AppBarTheme(
       elevation: 0,
       color: Colors.white,
+
       centerTitle: true,
       titleTextStyle: TextStyle(
         fontWeight: FontWeight.bold,
@@ -37,8 +38,6 @@ final ThemeData theme=ThemeData(
       ),
     ),
   ),
-  bottomSheetTheme: const BottomSheetThemeData(  shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(38),
-          topRight: Radius.circular(38))),)
+
+
 );

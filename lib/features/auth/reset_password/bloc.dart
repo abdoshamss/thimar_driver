@@ -6,8 +6,8 @@ part 'states.dart';
 part 'events.dart';
 
 class ResetPasswordBloc extends Bloc<ResetPasswordEvents, ResetPasswordStates> {
-  final DioHelper dioHelper;
-  ResetPasswordBloc(this.dioHelper) : super(ResetPasswordStates()) {
+  final DioHelper _dioHelper;
+  ResetPasswordBloc(this._dioHelper) : super(ResetPasswordStates()) {
     on<PostResetPasswordDataEvent>(_postData);
   }
 
@@ -17,7 +17,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvents, ResetPasswordStates> {
       Emitter<ResetPasswordStates> emit) async {
     emit(ResetPasswordLoadingState());
 
-    final response = await dioHelper.post("reset_password", data: {
+    final response = await _dioHelper.post("reset_password", data: {
       "phone": event.phone,
       "code": event.code,
       "password": confirmNewPasswordController.text,

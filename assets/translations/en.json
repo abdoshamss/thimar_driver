@@ -203,5 +203,9 @@
     "finish_order":"Finish Order",
 "thank_you": "Thank you, your request has been completed successfully",
 "you_can_follow": "You can follow the status of the request or return to the main page"
+  },
+  "order_status": {
+    "pending": "Pending"
   }
+
 }

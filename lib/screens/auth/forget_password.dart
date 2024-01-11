@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart';
-import 'package:thimar_driver/core/logic/pusher.dart';
+import 'package:thimar_driver/core/widgets/pusher.dart';
 import 'package:thimar_driver/features/auth/forget_password/bloc.dart';
 import 'package:thimar_driver/screens/auth/check_code.dart';
 import 'package:thimar_driver/screens/auth/login.dart';
@@ -13,7 +13,7 @@ import '../../core/widgets/app_input.dart';
 import '../../gen/assets.gen.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
-  const ForgetPasswordScreen({Key? key}) : super(key: key);
+  const ForgetPasswordScreen({super.key});
 
   @override
   State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();

@@ -1,3 +1,4 @@
+import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../features/auth/login/bloc.dart';
@@ -22,7 +23,7 @@ class CacheHelper {
   }
 
   static String? getToken() {
-    return _prefs.getString("token") ?? "";
+    return _prefs.getString("token") ;
   }
 
   static String? getCity() {
@@ -71,7 +72,7 @@ class CacheHelper {
   }
 
   static String getLanguage() {
-    return _prefs.getString("lang") ?? "";
+    return _prefs.getString("lang") ?? "ar";
   }
 
   static Future saveLoginData(UserData user) async {
@@ -88,18 +89,12 @@ class CacheHelper {
     await _prefs.setInt("unreadNotifications", user.list.unreadNotifications);
   }
 
-  // static Future saveCurrentLocation(Position currentLocation) async {
-  //   await _prefs.setDouble("latitude", currentLocation.latitude);
-  //   await _prefs.setDouble("longitude", currentLocation.longitude);
-  // }
-
-  static Future saveCurrentLocationWithNameHome(String location) async {
-    await _prefs.setString("location", location);
+  static Future saveCurrentLocation(Position currentLocation) async {
+    await _prefs.setDouble("latitude", currentLocation.latitude);
+    await _prefs.setDouble("longitude", currentLocation.longitude);
   }
 
-  static String getCurrentLocationWithNameHome() {
-    return _prefs.getString("location") ?? "";
-  }
+
 
   static Future saveCurrentLocationWithNameMap(String location) async {
     await _prefs.setString("location", location);
