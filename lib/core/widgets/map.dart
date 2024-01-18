@@ -48,6 +48,8 @@ class _State extends State<MapItem> {
             if (!widget.lightMode) {
               await goToMyLocation(location: location);
               await CacheHelper.saveCurrentLocationWithNameMap(locationName);
+
+              await CacheHelper.saveLatAndLng(location);
             } else {
               await getMaps(widget.lat, widget.lng);
             }
@@ -137,7 +139,7 @@ class _State extends State<MapItem> {
 
     await CacheHelper.saveCurrentLocation(currentLocation);
     getLocation(currentLocation.latitude, currentLocation.longitude);
-
+await CacheHelper.saveLatAndLng(currentLocation);
     return currentLocation;
   }
 }

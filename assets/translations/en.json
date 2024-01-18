@@ -7,7 +7,7 @@
   "cancel": "Cancel",
   "no_internet": "Internet not found",
   "join_us": "Join us to view all services",
-
+  "confirm": "Confirm",
   "log_in": {
     "hello_again": "Hello again",
     "you_can_login_now": "You can log in now",
@@ -73,7 +73,10 @@
     "please_enter_your_city": "Please enter your city",
     "register": "Register",
     "confirm_password": "Confirm password",
-    "something_wrong": "SomeThing Wrong"
+    "something_wrong": "SomeThing Wrong",
+    "car_data":"Car Data",
+    "locate_position":"Determine the location on the map"
+
   },
   "account_activation": {
     "activate_account": "Activate the account"
@@ -205,7 +208,10 @@
 "you_can_follow": "You can follow the status of the request or return to the main page"
   },
   "order_status": {
-    "pending": "Pending"
+    "pending": "Pending",
+    "in_way":"in way",
+    "accepted":"accepted",
+    "finished": "Finished"
   }
 
 }

@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart';
-import 'package:thimar_driver/core/widgets/pusher.dart';
 import 'package:thimar_driver/core/res/color.dart';
 import 'package:thimar_driver/core/widgets/app_button.dart';
 import 'package:thimar_driver/core/widgets/app_input.dart';
+import 'package:thimar_driver/core/widgets/pusher.dart';
 import 'package:thimar_driver/features/auth/login/bloc.dart';
 import 'package:thimar_driver/screens/auth/forget_password.dart';
 import 'package:thimar_driver/screens/auth/register_user.dart';
@@ -25,12 +25,13 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _bloc = KiwiContainer().resolve<LoginBloc>();
-@override
-  void dispose() {
 
+  @override
+  void dispose() {
     super.dispose();
     _bloc.close();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,12 +83,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         controller: _bloc.phoneController,
                         inputType: InputType.phone,
                         prefixIcon: Assets.icons.phone.path,
-                        labelText: "رقم الجوال",
+                        labelText: LocaleKeys.log_in_phone_number.tr(),
                         validator: (value) {
                           if (value.isEmpty) {
-                            return "بالرجاء ادخال رقم هاتفك";
+                            return LocaleKeys
+                                .log_in_please_enter_your_mobile_number
+                                .tr();
                           } else if (value.length < 9) {
-                            return "بالرجاء ادخال ٩ ارقام";
+                            return LocaleKeys.log_in_please_enter_nine_number
+                                .tr();
                           }
                           return null;
                         },
@@ -96,12 +100,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         controller: _bloc.passwordController,
                         inputType: InputType.password,
                         prefixIcon: Assets.icons.password.path,
-                        labelText: "كلمة المرور",
+                        labelText: LocaleKeys.log_in_password.tr(),
                         validator: (value) {
                           if (value.isEmpty) {
-                            return "بالرجاء ادخال كلمة المرور";
+                            return LocaleKeys
+                                .log_in_please_enter_your_password_again
+                                .tr();
                           } else if (value.length < 8) {
-                            return "بالرجاء ادخال ٨ احرف علي الاقل";
+                            return LocaleKeys
+                                .log_in_please_enter_six_letters_at_min
+                                .tr();
                           }
                           return null;
                         },
@@ -113,10 +121,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: AlignmentDirectional.bottomEnd,
                   child: GestureDetector(
                     onTap: () {
-                      push(const ForgetPasswordScreen(), c: context);
+                      push(const ForgetPasswordScreen(), );
                     },
                     child: Text(
-                      "نسيت كلمة المرور ؟",
+                      LocaleKeys.log_in_forget_password.tr(),
                       style: TextStyle(
                           color: Theme.of(context).hintColor,
                           fontSize: 16.sp,
@@ -131,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   bloc: _bloc,
                   builder: (context, state) => AppButton(
                     isLoading: state is LoginLoadingState,
-                    text: 'تسجيل الدخول',
+                    text: LocaleKeys.my_account_log_in.tr(),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _bloc.add(PostLoginDataEvent(context: context));
@@ -148,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: TextStyle(color: Theme.of(context).primaryColor),
                       children: <TextSpan>[
                         TextSpan(
-                          text: "ليس لديك حساب؟\t",
+                          text: "${ LocaleKeys.log_in_dont_have_an_account.tr()}\t",
                           style: TextStyle(
                             fontSize: 15.sp,
                             color: Theme.of(context).primaryColor,
@@ -156,9 +164,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         TextSpan(
                           recognizer: TapGestureRecognizer()
-                            ..onTap =
-                                () => push(const RegisterUserScreen(), c: context),
-                          text: "تسجيل الأن",
+                            ..onTap = () =>
+                                push(const RegisterUserScreen(), ),
+                          text:LocaleKeys.log_in_register_now.tr(),
                           style: const TextStyle(
                             fontWeight: FontWeight.w800,
                           ),

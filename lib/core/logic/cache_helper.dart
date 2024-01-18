@@ -71,6 +71,13 @@ class CacheHelper {
     await _prefs.setString("cityName", city);
   }
 
+  static Future setPhone(String phone) async {
+    await _prefs.setString("phone", phone);
+  }
+  static Future setFullName(String fullName) async {
+    await _prefs.setString("fullname", fullName);
+  }
+
   static String getLanguage() {
     return _prefs.getString("lang") ?? "ar";
   }
@@ -89,10 +96,23 @@ class CacheHelper {
     await _prefs.setInt("unreadNotifications", user.list.unreadNotifications);
   }
 
+
+  static Future saveLatAndLng(   location) async {
+    await _prefs.setDouble("lat", location.latitude);
+    await _prefs.setDouble("lng", location.longitude);
+  }
+  static double getLat() {
+    return _prefs.getDouble("lat") ?? 0;
+  }
+
+  static double getLng() {
+    return _prefs.getDouble("lng") ?? 0;
+  }
   static Future saveCurrentLocation(Position currentLocation) async {
     await _prefs.setDouble("latitude", currentLocation.latitude);
     await _prefs.setDouble("longitude", currentLocation.longitude);
   }
+
 
 
 

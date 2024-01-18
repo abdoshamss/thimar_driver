@@ -23,6 +23,7 @@ class CodegenLoader extends AssetLoader{
   "cancel": "Cancel",
   "no_internet": "Internet not found",
   "join_us": "Join us to view all services",
+  "confirm": "Confirm",
   "log_in": {
     "hello_again": "Hello again",
     "you_can_login_now": "You can log in now",
@@ -88,7 +89,9 @@ class CodegenLoader extends AssetLoader{
     "please_enter_your_city": "Please enter your city",
     "register": "Register",
     "confirm_password": "Confirm password",
-    "something_wrong": "SomeThing Wrong"
+    "something_wrong": "SomeThing Wrong",
+    "car_data": "Car Data",
+    "locate_position": "Determine the location on the map"
   },
   "account_activation": {
     "activate_account": "Activate the account"
@@ -217,6 +220,12 @@ class CodegenLoader extends AssetLoader{
     "finish_order": "Finish Order",
     "thank_you": "Thank you, your request has been completed successfully",
     "you_can_follow": "You can follow the status of the request or return to the main page"
+  },
+  "order_status": {
+    "pending": "Pending",
+    "in_way": "in way",
+    "accepted": "accepted",
+    "finished": "Finished"
   }
 };
 static const Map<String,dynamic> ar = {
@@ -228,6 +237,7 @@ static const Map<String,dynamic> ar = {
   "cancel": "الغاء",
   "no_internet": "لا يوجد انترنت",
   "join_us": "انضم الينا لتري لعرض حميع الخدمات",
+  "confirm": "تأكيد",
   "log_in": {
     "hello_again": "مرحبا بك مرة اخري",
     "you_can_login_now": "يمكنك تسجيل الدخول الان",
@@ -293,7 +303,9 @@ static const Map<String,dynamic> ar = {
     "please_enter_your_city": "بالرجاء ادخال مدينتك",
     "register": "تسجيل",
     "confirm_password": "تأكيد كلمة المرور",
-    "something_wrong": "حدث خطأ"
+    "something_wrong": "حدث خطأ",
+    "car_data": "بيانات السيارة",
+    "locate_position": "تحديد الموقع على الخريطة"
   },
   "account_activation": {
     "activate_account": "تفعيل الحساب"
@@ -422,6 +434,12 @@ static const Map<String,dynamic> ar = {
     "finish_order": "إنهاء الطلب",
     "thank_you": "شكرا لك لقد تم تنفيذ طلبك بنجاح",
     "you_can_follow": "يمكنك متابعة حالة الطلب او الرجوع للرئيسية"
+  },
+  "order_status": {
+    "pending": "معلق",
+    "in_way": "في الطريق",
+    "accepted": "مقبول",
+    "finished": "منتهي"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"en": en, "ar": ar};

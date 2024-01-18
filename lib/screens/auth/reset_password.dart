@@ -127,7 +127,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         TextSpan(
                           recognizer: TapGestureRecognizer()
                             ..onTap =
-                                () => push(const LoginScreen(), c: context),
+                                () => push(const LoginScreen(), ),
                           text: "تسجيل الدخول",
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,

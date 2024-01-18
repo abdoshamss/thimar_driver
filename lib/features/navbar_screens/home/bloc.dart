@@ -18,7 +18,9 @@ class PendingOrdersBloc extends Bloc<PendingOrdersEvents, PendingOrdersStates> {
   Future<void> _getData(GetPendingOrdersDataEvent event,
       Emitter<PendingOrdersStates> emit) async {
     emit(PendingOrdersLoadingState());
-    final response = await _dioHelper.get("driver/pending_orders");
+    final response = await _dioHelper.get("driver/pending_orders",params: {
+     if(searchController.text.isNotEmpty) "keyword":event.value
+    });
     final data = OrdersData.fromJson(response.response!.data);
     if (response.isSuccess) {
       emit(PendingOrdersSuccessState(data: data));

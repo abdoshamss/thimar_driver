@@ -8,14 +8,14 @@ import 'package:thimar_driver/core/widgets/pusher.dart';
 import 'package:thimar_driver/features/auth/logout/bloc.dart';
 import 'package:thimar_driver/screens/auth/login.dart';
 import 'package:thimar_driver/screens/my_account_screens/about_app.dart';
-import 'package:thimar_driver/screens/my_account_screens/contact_us.dart';
 import 'package:thimar_driver/screens/my_account_screens/components/screen_item.dart';
+import 'package:thimar_driver/screens/my_account_screens/contact_us.dart';
 import 'package:thimar_driver/screens/my_account_screens/edit_profile.dart';
 import 'package:thimar_driver/screens/my_account_screens/faqs.dart';
 import 'package:thimar_driver/screens/my_account_screens/give_advice.dart';
 import 'package:thimar_driver/screens/my_account_screens/privacy.dart';
-
 import '../../../core/logic/cache_helper.dart';
+ import '../../../features/profile/get_profile/bloc.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../generated/locale_keys.g.dart';
 
@@ -27,12 +27,15 @@ class MyAccountScreen extends StatefulWidget {
 }
 
 class _MyAccountScreenState extends State<MyAccountScreen> {
+  final _bloc = KiwiContainer().resolve<GetProfileBloc>()
+    ..add(GetProfileDataEvent());
   final _logOutBloc = KiwiContainer().resolve<LogOutBLoc>();
 
   @override
   void dispose() {
     super.dispose();
     _logOutBloc.close();
+    _bloc.close();
   }
 
   @override
@@ -52,68 +55,79 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                 ),
                 fit: BoxFit.cover),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                LocaleKeys.my_account_my_account.tr(),
-                style: TextStyle(
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-              SizedBox(
-                height: 8.h,
-              ),
-              Container(
-                clipBehavior: Clip.antiAlias,
-                height: 75.h,
-                width: 75.w,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25.r),
-                    image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(CacheHelper.getImage()))),
-              ),
-              SizedBox(
-                height: 16.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    CacheHelper.getFullName().isEmpty
-                        ? LocaleKeys.my_account_user_name.tr()
-                        : CacheHelper.getFullName(),
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+          child: BlocBuilder(
+            bloc: _bloc,
+            builder: (context, state) {
+              if (state is GetProfileLoadingState) {
+                return loadingWidget();
+              } else if (state is GetProfileSuccessState) {
+                final data = state.data.data;
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      LocaleKeys.my_account_my_account.tr(),
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 8.w,
-                  ),
-                  if (CacheHelper.getIsVip() == 1)
-                    Image.asset(
-                      Assets.icons.vip.path,
-                      width: 30.w,
-                      height: 30.h,
+                    SizedBox(
+                      height: 8.h,
                     ),
-                ],
-              ),
-              SizedBox(
-                height: 8.h,
-              ),
-              Text(
-                CacheHelper.getPhone().isNotEmpty
-                    ? "${CacheHelper.getPhone()}+"
-                    : "رقم الجوال",
-                style: TextStyle(
-                    color: Colors.white.withOpacity(.7), fontSize: 16.sp),
-              ),
-            ],
+                    Container(
+                      clipBehavior: Clip.antiAlias,
+                      height: 75.h,
+                      width: 75.w,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25.r),
+                          image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: NetworkImage(data.image))),
+                    ),
+                    SizedBox(
+                      height: 16.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          data.fullname,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 8.w,
+                        ),
+                        if (CacheHelper.getIsVip() == 1)
+                          Image.asset(
+                            Assets.icons.vip.path,
+                            width: 30.w,
+                            height: 30.h,
+                          ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 8.h,
+                    ),
+                    Text(
+                      "${data.phone}+",
+                      style: TextStyle(
+                          color: Colors.white.withOpacity(.7), fontSize: 16.sp),
+                    ),
+                  ],
+                );
+              } else if (state is GetProfileErrorState) {
+                return Center(
+                  child: Text(state.message),
+                );
+              }
+              return const SizedBox.shrink();
+            },
           ),
         ),
         SizedBox(
@@ -178,10 +192,10 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
           bloc: _logOutBloc,
           listener: (BuildContext context, state) async {
             if (state is LogOutSuccessState) {
-             await CacheHelper.removeLoginData();
+              await CacheHelper.removeLoginData();
               pushAndRemoveUntil(
                 const LoginScreen(),
-                c: context,
+
               );
             }
           },

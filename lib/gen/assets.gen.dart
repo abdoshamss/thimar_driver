@@ -71,6 +71,10 @@ class $AssetsIconsGen {
   AssetGenImage get checkVip =>
       const AssetGenImage('assets/icons/check_vip.png');
 
+  /// File path: assets/icons/circleUser.png
+  AssetGenImage get circleUser =>
+      const AssetGenImage('assets/icons/circleUser.png');
+
   /// File path: assets/icons/clock.png
   AssetGenImage get clock => const AssetGenImage('assets/icons/clock.png');
 
@@ -96,6 +100,10 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/flag.jpg
   AssetGenImage get flag => const AssetGenImage('assets/icons/flag.jpg');
+
+  /// File path: assets/icons/greenFlag.png
+  AssetGenImage get greenFlag =>
+      const AssetGenImage('assets/icons/greenFlag.png');
 
   /// File path: assets/icons/home.png
   AssetGenImage get home => const AssetGenImage('assets/icons/home.png');
@@ -220,6 +228,7 @@ class $AssetsIconsGen {
         cartHome,
         check,
         checkVip,
+        circleUser,
         clock,
         dollar,
         edit,
@@ -228,6 +237,7 @@ class $AssetsIconsGen {
         favsHome,
         filter,
         flag,
+        greenFlag,
         home,
         info,
         ipan,
@@ -265,6 +275,10 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/confirmation.png
+  AssetGenImage get confirmation =>
+      const AssetGenImage('assets/images/confirmation.png');
+
   /// File path: assets/images/drawer_background.png
   AssetGenImage get drawerBackground =>
       const AssetGenImage('assets/images/drawer_background.png');
@@ -300,6 +314,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [
+        confirmation,
         drawerBackground,
         logo,
         mainLogo,

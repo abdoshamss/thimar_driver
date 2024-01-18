@@ -22,10 +22,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  void _getData(String value) {}
   Timer? timer;
   final _bloc = KiwiContainer().resolve<PendingOrdersBloc>()
     ..add(GetPendingOrdersDataEvent());
+  void _getData(String value) {
+    _bloc.add(GetPendingOrdersDataEvent(value:value));
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import 'package:thimar_driver/gen/assets.gen.dart';
 enum InputType { normal, phone, password, search, city }
 
 class AppInput extends StatefulWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final InputType inputType;
   final String? prefixIcon, labelText, hintText,value;
 
@@ -22,7 +22,7 @@ class AppInput extends StatefulWidget {
 
   const AppInput({
     super.key,
-    required this.controller,
+      this.controller,
     this.inputType = InputType.normal,
     this.prefixIcon,
     this.validator,
@@ -63,8 +63,8 @@ class _AppInputState extends State<AppInput> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    width: 35.w,
-                    height: 20.h,
+                    width: 30.w,
+                    height: 18.h,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             image: AssetImage(Assets.images.saudi.path),
@@ -77,7 +77,7 @@ class _AppInputState extends State<AppInput> {
                     "966+",
                     style: TextStyle(
                         color: Theme.of(context).primaryColor,
-                        fontSize: 15.sp,
+
                         fontWeight: FontWeight.w500),
                   ),
                 ],

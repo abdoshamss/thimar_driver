@@ -13,10 +13,9 @@ import 'package:thimar_driver/firebase_options.dart';
 import 'package:thimar_driver/screens/auth/Splash.dart';
 
 import 'core/logic/cache_helper.dart';
-
 import 'generated/codegen_loader.g.dart';
 
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,9 +40,8 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(
-        supportedLocales: const [ Locale('ar'),Locale('en')],
+        supportedLocales: const [Locale('ar'), Locale('en')],
         saveLocale: true,
-
         startLocale: const Locale('ar'),
         path: 'assets/translations',
         assetLoader: const CodegenLoader(),
@@ -66,7 +64,7 @@ class MyApp extends StatelessWidget {
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: context.locale,
-        key: navigatorKey,
+        navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
         title: 'Thimar',
         builder: (context, child) {
@@ -74,7 +72,10 @@ class MyApp extends StatelessWidget {
               data: MediaQuery.of(context).copyWith(textScaleFactor: 1.sp),
               child: UnFocus(
                 child: Directionality(
-                    textDirection:CacheHelper.getLanguage()=="ar"? mat.TextDirection.rtl:mat.TextDirection.ltr, child: child!),
+                    textDirection: CacheHelper.getLanguage() == "ar"
+                        ? mat.TextDirection.rtl
+                        : mat.TextDirection.ltr,
+                    child: child!),
               ));
         },
         theme: theme,

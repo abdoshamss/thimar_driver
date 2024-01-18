@@ -66,7 +66,13 @@ class DioHelper {
             message: "Check Your EndPoint Page Not Founded",
             isSuccess: false,
             response: e.response);
-      } else {
+      } else if(e.response==null){
+        return CustomResponse(
+            message: e.response?.data["message"] ?? "response is null",
+            isSuccess: true,
+            response: e.response);
+
+      }else {
         return CustomResponse(
             message: e.response?.data["message"] ?? "Failed",
             isSuccess: false,

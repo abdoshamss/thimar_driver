@@ -7,6 +7,7 @@
   "cancel": "الغاء",
   "no_internet": "لا يوجد انترنت",
   "join_us": "انضم الينا لتري لعرض حميع الخدمات",
+  "confirm": "تأكيد",
   "log_in": {
     "hello_again": "مرحبا بك مرة اخري",
     "you_can_login_now": "يمكنك تسجيل الدخول الان",
@@ -72,7 +73,9 @@
     "please_enter_your_city": "بالرجاء ادخال مدينتك",
     "register": "تسجيل",
     "confirm_password": "تأكيد كلمة المرور",
-    "something_wrong": "حدث خطأ"
+    "something_wrong": "حدث خطأ",
+    "car_data": "بيانات السيارة",
+    "locate_position":"تحديد الموقع على الخريطة"
   },
   "account_activation": {
     "activate_account": "تفعيل الحساب"
@@ -203,6 +206,9 @@
     "you_can_follow": "يمكنك متابعة حالة الطلب او الرجوع للرئيسية"
   },
   "order_status": {
-    "pending": "معلق"
+    "pending": "معلق",
+    "in_way": "في الطريق",
+    "accepted": "مقبول",
+    "finished": "منتهي"
   }
 }

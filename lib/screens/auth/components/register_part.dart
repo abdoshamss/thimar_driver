@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:thimar_driver/generated/locale_keys.g.dart';
 
 import '../../../gen/assets.gen.dart';
 
@@ -22,7 +24,7 @@ class RegisterPartScreen extends StatelessWidget {
         Align(
           alignment: AlignmentDirectional.bottomStart,
           child: Text(
-            "مرحبا بك مرة أخرى",
+            LocaleKeys.log_in_hello_again.tr(),
             style: TextStyle(
                 color: Theme.of(context).primaryColor,
                 fontSize: 16.sp,
@@ -35,7 +37,7 @@ class RegisterPartScreen extends StatelessWidget {
         Align(
           alignment: AlignmentDirectional.bottomStart,
           child: Text(
-            "يمكنك تسجيل حساب جديد الأن",
+           LocaleKeys.register_you_can_register_new_account_now.tr(),
             style: TextStyle(
               fontSize: 16.sp,
               fontWeight: FontWeight.w400,
@@ -116,14 +118,14 @@ class RegisterPartScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              "البيانات الشخصية",
+              LocaleKeys.my_account_personal_data.tr(),
               style: TextStyle(
                   color: Theme.of(context).primaryColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 13.sp),
             ),
             Text(
-              "بيانات السيارة",
+              LocaleKeys.register_car_data.tr(),
               style: TextStyle(
                   color: isActive
                       ? Theme.of(context).primaryColor

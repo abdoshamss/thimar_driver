@@ -44,7 +44,7 @@ class AppButton extends StatelessWidget {
                               ? const Color(0xffFFE1E1)
                               : null,
                           fixedSize:
-                              isBig ? Size(343.w, 60.h) : Size(160.w, 50.h),
+                              isBig ? Size(343.w, 50.h) : Size(160.w, 50.h),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.r),
                           ),
@@ -61,7 +61,7 @@ class AppButton extends StatelessWidget {
                         onPressed: onPressed,
                         style: ElevatedButton.styleFrom(
                           fixedSize:
-                              isBig ? Size(343.w, 60.h) : Size(135.w, 50.h),
+                              isBig ? Size(343.w, 50.h) : Size(135.w, 50.h),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15.r),
                               side: BorderSide(

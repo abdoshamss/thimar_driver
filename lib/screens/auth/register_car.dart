@@ -1,43 +1,51 @@
-import 'dart:io';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:kiwi/kiwi.dart';
 import 'package:thimar_driver/core/widgets/app_button.dart';
 import 'package:thimar_driver/core/widgets/app_input.dart';
 import 'package:thimar_driver/core/widgets/cities_and_car_model.dart';
+import 'package:thimar_driver/features/auth/register/bloc.dart';
 import 'package:thimar_driver/gen/assets.gen.dart';
+import 'package:thimar_driver/screens/auth/check_code.dart';
 import 'package:thimar_driver/screens/auth/components/register_part.dart';
 import 'package:thimar_driver/screens/auth/components/upload_photo.dart';
 
+import '../../core/logic/helper_methods.dart';
 import '../../core/widgets/pusher.dart';
+import '../../core/widgets/toast.dart';
 import '../../generated/locale_keys.g.dart';
 import 'login.dart';
 
 class RegisterCarScreen extends StatefulWidget {
-  const RegisterCarScreen({super.key});
+  final String name, phone, location, id, email, password, confirmPassword;
+
+  const RegisterCarScreen(
+      {super.key,
+      required this.name,
+      required this.phone,
+      required this.location,
+      required this.id,
+      required this.email,
+      required this.password,
+      required this.confirmPassword});
 
   @override
   State<RegisterCarScreen> createState() => _RegisterCarScreenState();
 }
 
 class _RegisterCarScreenState extends State<RegisterCarScreen> {
-  final _formKey = GlobalKey<FormState>();
-
-  final carTypeController = TextEditingController();
-  final carModelController = TextEditingController();
-  final bankNameController = TextEditingController();
-  final ibanNumberController = TextEditingController();
-
-  File? _licenseImage,
-      _carFormImage,
-      _carInsurance,
-      _frontCarImage,
-      _behindCarImage;
   bool _isSelectable = false;
-  late int _modelId;
+  final _formKey = GlobalKey<FormState>();
+  final _bloc = KiwiContainer().resolve<RegisterBloc>();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _bloc.close();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,25 +68,35 @@ class _RegisterCarScreenState extends State<RegisterCarScreen> {
                       children: [
                         GestureDetector(
                             onTap: () async {
-                              _licenseImage = await _uploadPhoto(
+                              _bloc.licenseImage = await uploadPhoto(
                                 context: context,
                               );
                               setState(() {});
                             },
-                            child:
-                                  PhotoUpload(text: "صورة رخصة القيادة", image: _licenseImage,)),
+                            child: PhotoUpload(
+                              text: "صورة رخصة القيادة",
+                              image: _bloc.licenseImage,
+                            )),
                         GestureDetector(
                             onTap: () async {
-                              _carFormImage =
-                                  await _uploadPhoto(context: context);   setState(() {});
+                              _bloc.carFormImage =
+                                  await uploadPhoto(context: context);
+                              setState(() {});
                             },
-                            child:   PhotoUpload(text: "استمارة السيارة", image: _carFormImage,)),
+                            child: PhotoUpload(
+                              text: "استمارة السيارة",
+                              image: _bloc.carFormImage,
+                            )),
                         GestureDetector(
                             onTap: () async {
-                              _carInsurance =
-                                  await _uploadPhoto(context: context);   setState(() {});
+                              _bloc.carInsurance =
+                                  await uploadPhoto(context: context);
+                              setState(() {});
                             },
-                            child:   PhotoUpload(text: "تأمين السيارة", image: _carInsurance,)),
+                            child: PhotoUpload(
+                              text: "تأمين السيارة",
+                              image: _bloc.carInsurance,
+                            )),
                       ],
                     ),
                     SizedBox(height: 16.h),
@@ -87,24 +105,31 @@ class _RegisterCarScreenState extends State<RegisterCarScreen> {
                       children: [
                         GestureDetector(
                             onTap: () async {
-                              _frontCarImage =
-                                  await _uploadPhoto(context: context);   setState(() {});
+                              _bloc.frontCarImage =
+                                  await uploadPhoto(context: context);
+                              setState(() {});
                             },
-                            child:
-                                  PhotoUpload(text: "السيارة من الأمام", image: _frontCarImage,)),
+                            child: PhotoUpload(
+                              text: "السيارة من الأمام",
+                              image: _bloc.frontCarImage,
+                            )),
                         GestureDetector(
                             onTap: () async {
-                              _behindCarImage =
-                                  await _uploadPhoto(context: context);   setState(() {});
+                              _bloc.behindCarImage =
+                                  await uploadPhoto(context: context);
+                              setState(() {});
                             },
-                            child:   PhotoUpload(text: "السيارة من الخلف", image: _behindCarImage,)),
+                            child: PhotoUpload(
+                              text: "السيارة من الخلف",
+                              image: _bloc.behindCarImage,
+                            )),
                       ],
                     ),
                   ],
                 ),
               ),
               AppInput(
-                controller: carTypeController,
+                controller: _bloc.carTypeController,
                 labelText: "نوع السيارة",
                 prefixIcon: Assets.icons.car.path,
                 validator: (value) {
@@ -115,7 +140,7 @@ class _RegisterCarScreenState extends State<RegisterCarScreen> {
                 },
               ),
               AppInput(
-                controller:carModelController ,
+                controller: _bloc.carModelController,
                 labelText: "موديل السيارة",
                 prefixIcon: Assets.icons.car.path,
                 arrow: true,
@@ -130,22 +155,37 @@ class _RegisterCarScreenState extends State<RegisterCarScreen> {
                       fromWhere: 'Cars',
                     ),
                   ).then((value) {
-                    carModelController.text = value[0];
-                    _modelId = value[1];
+                    if (value != null) {
+                      _bloc.modelId = value[0];
+                      _bloc.carModelController.text = value[1];
+                    }
                   });
                 },
               ),
               AppInput(
-                controller: ibanNumberController,
+                controller: _bloc.ibanNumberController,
                 prefixIcon: Assets.icons.ipan.path,
                 inputType: InputType.phone,
                 saudiIcon: false,
                 labelText: "رقم الإيبان",
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return "بالرجاء ادخال رقم الإيبان";
+                  }
+
+                  return null;
+                },
               ),
               AppInput(
-                controller: bankNameController,
+                controller: _bloc.bankNameController,
                 labelText: "إسم البنك",
                 prefixIcon: Assets.icons.bank.path,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return "بالرجاء ادخال إسم البنك";
+                  }
+                  return null;
+                },
               ),
               SizedBox(
                 height: 24.h,
@@ -195,9 +235,58 @@ class _RegisterCarScreenState extends State<RegisterCarScreen> {
               SizedBox(
                 height: 16.h,
               ),
-              AppButton(
-                text: "تسجيل",
-                onPressed: () {},
+              BlocConsumer(
+                bloc: _bloc,
+                listener: (BuildContext context, Object? state) {
+                  if (state is RegisterSuccessState) {
+                    push(
+                        CheckCodeScreen(
+                            pageName: "activation", phone: widget.phone),
+                        );
+                  }
+                },
+                builder: (BuildContext context, state) {
+                  return AppButton(
+                    isLoading: state is RegisterLoadingState,
+                    text: "تسجيل",
+                    onPressed: () {
+                      String message = "";
+                      if (_bloc.licenseImage == null) {
+                        message = "بالرجاء ادخال صورة رخصة القيادة";
+                      } else if (_bloc.carFormImage == null) {
+                        message = "بالرجاء ادخال صورة استمارة السيارة";
+                      } else if (_bloc.carInsurance == null) {
+                        message = "بالرجاء ادخال صورة تأمين السيارة";
+                      } else if (_bloc.frontCarImage == null) {
+                        message = "بالرجاء ادخال صورة السيارة من الامام";
+                      } else if (_bloc.behindCarImage == null) {
+                        message = "بالرجاء ادخال صورة السيارة من الخلف";
+                      } else if (_bloc.carModelController.text.isEmpty) {
+                        message = "بالرجاء ادخال موديل السيارة";
+                      } else if (!_isSelectable) {
+                        message = "بالرجاء الموافقة علي الشروط والاحكام";
+                      }
+                      if (message.isNotEmpty) {
+                        Toast.show(message, context,
+                            messageType: MessageType.error);
+                      } else if (_formKey.currentState!.validate()) {
+                        _bloc.add(PostRegisterDataEvent(
+                            context: context,
+                            name: widget.name,
+                            phone: widget.password,
+                            location: widget.location,
+                            id: widget.id,
+                            email: widget.email,
+                            password: widget.password,
+                            confirmPassword: widget.confirmPassword));
+                      }
+                      push(
+                          CheckCodeScreen(
+                              pageName: "activation", phone: widget.phone),
+                          );
+                    },
+                  );
+                },
               ),
               SizedBox(height: 24.h),
               Center(
@@ -215,7 +304,7 @@ class _RegisterCarScreenState extends State<RegisterCarScreen> {
                       ),
                       TextSpan(
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () => push(const LoginScreen(), c: context),
+                          ..onTap = () => push(const LoginScreen(), ),
                         text: LocaleKeys.my_account_log_in.tr(),
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
@@ -231,101 +320,5 @@ class _RegisterCarScreenState extends State<RegisterCarScreen> {
         ),
       ),
     );
-  }
-
-  Future<File> _uploadPhoto({required BuildContext context, File? image}) async {
-    await showModalBottomSheet(
-      context: context,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(38.r), topRight: Radius.circular(38.r))),
-      builder: (context) => Container(
-        padding:
-            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-        child: Padding(
-          padding: EdgeInsets.all(16.r),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.close)),
-                  Text(
-                    LocaleKeys.profile_select_image_from.tr(),
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.black),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 32.r,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GestureDetector(
-                    onTap: () async {
-                      final image2 = await ImagePicker.platform.pickImage(
-                        source: ImageSource.gallery,
-                        imageQuality: 30,
-                      );
-                      if (image2 != null) {
-                        image = File(image2.path);
-                        debugPrint(image2.path);
-                        Navigator.pop(context);
-                      }
-                    },
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.image_rounded,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        SizedBox(
-                          width: 8.w,
-                        ),
-                        Text(LocaleKeys.profile_gallery.tr()),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-                      final image2 = await ImagePicker.platform.pickImage(
-                        source: ImageSource.camera,
-                        imageQuality: 30,
-                      );
-                      if (image2 != null) {
-                        image = File(image2.path);
-                        debugPrint(image2.path);
-                        Navigator.pop(context);
-                      }
-                    },
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.camera_alt,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                        SizedBox(
-                          width: 8.w,
-                        ),
-                        Text(LocaleKeys.profile_camera.tr()),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-
-    return image!;
   }
 }

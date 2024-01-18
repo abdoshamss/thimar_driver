@@ -1,4 +1,5 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:kiwi/kiwi.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:thimar_driver/core/widgets/pusher.dart';
 import 'package:thimar_driver/features/auth/resend_code/bloc.dart';
+import 'package:thimar_driver/generated/locale_keys.g.dart';
 import 'package:thimar_driver/screens/auth/forget_password.dart';
 import 'package:thimar_driver/screens/auth/reset_password.dart';
 
@@ -49,8 +51,8 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
             alignment: AlignmentDirectional.bottomStart,
             child: Text(
                 widget.pageName == 'check'
-                    ? "نسيت كلمة المرور"
-                    : "تفعيل الحساب",
+                    ? LocaleKeys.forget_password_forget_password.tr()
+                    : LocaleKeys.account_activation_activate_account.tr(),
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontSize: 16.sp,
@@ -58,7 +60,7 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
         SizedBox(height: 8.h),
         Align(
             alignment: AlignmentDirectional.bottomStart,
-            child: Text("أدخل الكود المكون من 4 أرقام المرسل علي رقم الجوال",
+            child: Text(LocaleKeys.check_code_enter_the_code_4digits.tr(),
                 style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w300,
@@ -76,10 +78,10 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
             SizedBox(width: 5.w),
             GestureDetector(
               onTap: () {
-                push(const ForgetPasswordScreen(), c: context);
+                push(const ForgetPasswordScreen(), );
               },
               child: Text(
-                "تغيير رقم الجوال",
+                LocaleKeys.check_code_change_phone_number.tr(),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   decoration: TextDecoration.underline,
@@ -95,7 +97,7 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
           child: PinCodeTextField(
             validator: (value) {
               if (value!.isEmpty || value.length < 4) {
-                return "بالرجاء ادخال الكود المكون من اربعة ارقام";
+                return LocaleKeys.check_code_enter_the_code_4digits.tr();
               }
               return null;
             },
@@ -129,13 +131,13 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                       phone: widget.phone,
                       code: _bloc.codeController.text,
                     ),
-                    c: context);
+                    );
               }
             },
             bloc: _bloc,
             builder: (context, state) => AppButton(
                 isLoading: state is CheckCodeLoadingState,
-                text: "تأكيد الكود",
+                text: LocaleKeys.check_code_confirm_the_code.tr(),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _bloc.add(PostCheckCodeDataEvent(
@@ -149,14 +151,14 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
           Column(
             children: [
               Text(
-                "لم تستلم الكود ؟",
+                LocaleKeys.check_code_didnt_receive_code.tr(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16.sp,
                 ),
               ),
               Text(
-                "يمكنك إعادة إرسال الكود بعد",
+                LocaleKeys.check_code_you_can_receive_code_after.tr(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16.sp,
@@ -211,7 +213,7 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
               builder: (context, state) {
                 return AppButton(
                   isLoading: state is ResendCodeLoadingState,
-                  text: "إعادة الإرسال",
+                  text:  LocaleKeys.check_code_resend.tr(),
                   isBig: false,
                   onPressed: () {
                     _isTimerRunning = true;
@@ -231,15 +233,15 @@ class _CheckCodeScreenState extends State<CheckCodeScreen> {
                   style: TextStyle(color: Theme.of(context).primaryColor),
                   children: <TextSpan>[
             TextSpan(
-                text: "لديك حساب بالفعل؟\t",
+                text: "${ LocaleKeys.forget_password_you_have_an_account.tr()}\t",
                 style: TextStyle(
                   fontSize: 15.sp,
                   color: Theme.of(context).primaryColor,
                 )),
             TextSpan(
                 recognizer: TapGestureRecognizer()
-                  ..onTap = () => push(const LoginScreen(), c: context),
-                text: "تسجيل الدخول",
+                  ..onTap = () => push(const LoginScreen(), ),
+                text: LocaleKeys.my_account_log_in.tr(),
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ))

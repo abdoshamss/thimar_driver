@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thimar_driver/screens/home/screens/home.dart';
 import 'package:thimar_driver/screens/home/screens/my_account.dart';
 import 'package:thimar_driver/screens/home/screens/notifications.dart';
-import 'package:thimar_driver/screens/home/screens/orders.dart';
+import 'package:thimar_driver/screens/home/screens/my_orders.dart';
 
 import '../../gen/assets.gen.dart';
 import '../../generated/locale_keys.g.dart';
@@ -33,7 +33,7 @@ final List<String> _titles = [
   ];
  final List<Widget> _pages = [
     const HomeScreen(),
-    const OrdersScreen(),
+    const MyOrdersScreen(),
     const NotificationsScreen(),
     const MyAccountScreen(),
   ];

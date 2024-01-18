@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../main.dart';
 
-Future push(Widget child,{BuildContext? c}) {
-  return Navigator.of(c??navigatorKey.currentContext!)
+Future push(Widget child) {
+  return Navigator.of(navigatorKey.currentContext!)
       .push(SlideRight(page: child));
 }
 
@@ -16,8 +16,8 @@ pushReplacement(Widget child) {
       .pushReplacement(MaterialPageRoute(builder: (context) => child));
 }
 
-pushAndRemoveUntil(Widget child, {BuildContext? c}) {
-  return Navigator.of(c ?? navigatorKey.currentContext!).pushAndRemoveUntil(
+pushAndRemoveUntil(Widget child) {
+  return Navigator.of( navigatorKey.currentContext!).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => child), (route) => false);
 }
 

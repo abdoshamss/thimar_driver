@@ -9,6 +9,7 @@ abstract class  LocaleKeys {
   static const cancel = 'cancel';
   static const no_internet = 'no_internet';
   static const join_us = 'join_us';
+  static const confirm = 'confirm';
   static const log_in_hello_again = 'log_in.hello_again';
   static const log_in_you_can_login_now = 'log_in.you_can_login_now';
   static const log_in_please_enter_your_mobile_number = 'log_in.please_enter_your_mobile_number';
@@ -69,6 +70,8 @@ abstract class  LocaleKeys {
   static const register_register = 'register.register';
   static const register_confirm_password = 'register.confirm_password';
   static const register_something_wrong = 'register.something_wrong';
+  static const register_car_data = 'register.car_data';
+  static const register_locate_position = 'register.locate_position';
   static const register = 'register';
   static const account_activation_activate_account = 'account_activation.activate_account';
   static const account_activation = 'account_activation';
@@ -183,5 +186,10 @@ abstract class  LocaleKeys {
   static const complete_order_thank_you = 'complete_order.thank_you';
   static const complete_order_you_can_follow = 'complete_order.you_can_follow';
   static const complete_order = 'complete_order';
+  static const order_status_pending = 'order_status.pending';
+  static const order_status_in_way = 'order_status.in_way';
+  static const order_status_accepted = 'order_status.accepted';
+  static const order_status_finished = 'order_status.finished';
+  static const order_status = 'order_status';
 
 }

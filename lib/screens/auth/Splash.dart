@@ -22,9 +22,9 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(const Duration(seconds: 3), () {
       if (CacheHelper.getToken() == null) {
-        push(const LoginScreen(), c: context);
+        push(const LoginScreen(), );
       } else {
-        pushAndRemoveUntil(HomeNavBarScreen(), c: context);
+        pushAndRemoveUntil(HomeNavBarScreen(), );
       }
     });
   }

@@ -10,7 +10,7 @@ final BuildContext context;
   LoginSuccessState( {required this.message,required this.context,}){
     Toast.show(message, context);
 
-   push(  HomeNavBarScreen(),c: context);
+   push(  HomeNavBarScreen(),);
   }
 
 }

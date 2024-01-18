@@ -2,16 +2,19 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:kiwi/kiwi.dart';
 import 'package:thimar_driver/core/logic/cache_helper.dart';
 import 'package:thimar_driver/core/widgets/pusher.dart';
 import 'package:thimar_driver/core/widgets/app_button.dart';
 import 'package:thimar_driver/core/widgets/app_input.dart';
 import 'package:thimar_driver/core/widgets/cities_and_car_model.dart';
+import 'package:thimar_driver/core/widgets/toast.dart';
 import 'package:thimar_driver/screens/auth/components/register_part.dart';
 import 'package:thimar_driver/screens/auth/login.dart';
 import 'package:thimar_driver/screens/auth/map_screen.dart';
 import 'package:thimar_driver/screens/auth/register_car.dart';
 
+import '../../features/auth/register/bloc.dart';
 import '../../gen/assets.gen.dart';
 import '../../generated/locale_keys.g.dart';
 
@@ -24,16 +27,15 @@ class RegisterUserScreen extends StatefulWidget {
 
 class _RegisterUserScreenState extends State<RegisterUserScreen> {
   final _formKey = GlobalKey<FormState>();
-
-  final nameController = TextEditingController();
-  final phoneController = TextEditingController();
-  final cityController = TextEditingController();
-  final locationController = TextEditingController();
-  final idController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
-  late int _cityId;
+  final _nameController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _locationController = TextEditingController();
+  final _idController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+  final _cityController = TextEditingController();
+  final _bloc = KiwiContainer().resolve<RegisterBloc>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +47,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
             children: [
               const RegisterPartScreen(),
               AppInput(
-                controller: nameController,
+                controller: _nameController,
                 prefixIcon: Assets.icons.user.path,
                 labelText: "اسم المندوب",
                 validator: (value) {
@@ -56,7 +58,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                 },
               ),
               AppInput(
-                controller: phoneController,
+                controller: _phoneController,
                 prefixIcon: Assets.icons.phone.path,
                 labelText: "رقم الجوال",
                 validator: (value) {
@@ -71,16 +73,14 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
               Row(
                 children: [
                   AppInput(
-                      controller: cityController,
+                      controller: _cityController,
                       inputType: InputType.city,
                       prefixIcon: Assets.icons.flag.path,
                       labelText: "المدينة",
-                      value: cityController.text,
+                      value: _cityController.text,
                       onPressed: () {
-                        cityController.text = "";
-                        setState(() {
-
-                        });
+                        _cityController.text = "";
+                        setState(() {});
                       },
                       onTap: () {
                         showModalBottomSheet(
@@ -93,8 +93,8 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                           builder: (context) => const Menu(),
                         ).then((value) {
                           if (value != null) {
-                            cityController.text = value[0];
-                            _cityId = value[1];
+                            _bloc.cityId = value[0];
+                            _cityController.text = value[1];
                             setState(() {});
                           }
                         });
@@ -102,21 +102,21 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                 ],
               ),
               AppInput(
-                controller: locationController,
+                controller: _locationController,
                 prefixIcon: Assets.icons.markRegister.path,
                 labelText: "تحديد الموقع على الخريطة",
                 onTap: () {
-                  push(const MapScreen(), c: context).then((value) {
+                  push(const MapScreen(), ).then((value) {
                     if (CacheHelper.getCurrentLocationWithNameMap()
                         .isNotEmpty) {
-                      locationController.text =
+                      _locationController.text =
                           CacheHelper.getCurrentLocationWithNameMap();
                     }
                   });
                 },
               ),
               AppInput(
-                controller: idController,
+                controller: _idController,
                 prefixIcon: Assets.icons.userRegister.path,
                 labelText: "رقم الهوية",
                 inputType: InputType.phone,
@@ -129,7 +129,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                 },
               ),
               AppInput(
-                controller: emailController,
+                controller: _emailController,
                 prefixIcon: Assets.icons.email.path,
                 labelText: "البريد الالكتروني",
                 validator: (value) {
@@ -140,7 +140,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                 },
               ),
               AppInput(
-                controller: passwordController,
+                controller: _passwordController,
                 prefixIcon: Assets.icons.password.path,
                 labelText: "كلمة المرور",
                 inputType: InputType.password,
@@ -153,14 +153,14 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                 },
               ),
               AppInput(
-                controller: confirmPasswordController,
+                controller: _confirmPasswordController,
                 prefixIcon: Assets.icons.password.path,
                 labelText: "تأكيد كلمة المرور",
                 inputType: InputType.password,
                 validator: (value) {
                   if (value.isEmpty ||
                       value.length < 6 ||
-                      value != passwordController.text) {
+                      value != _passwordController.text) {
                     return LocaleKeys.log_in_please_enter_your_password_again
                         .tr();
                   }
@@ -171,8 +171,25 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
               AppButton(
                   text: "التالي",
                   onPressed: () {
-                    push(const RegisterCarScreen(), c: context);
-                    if (_formKey.currentState!.validate()) {}
+                    if (_cityController.text.isEmpty) {
+                      Toast.show("بالرجاء ادخال المدينة", context,
+                          messageType: MessageType.error);
+                    } else if (_locationController.text.isEmpty) {
+                      Toast.show("بالرجاء ادخال العنوان علي الخريطة", context,
+                          messageType: MessageType.error);
+                    } else if (_formKey.currentState!.validate()) {
+                      push(
+                          RegisterCarScreen(
+                            name: _nameController.text,
+                            phone: _phoneController.text,
+                            location: _locationController.text,
+                            id: _idController.text,
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                            confirmPassword: _confirmPasswordController.text,
+                          ),
+                          );
+                    }
                   }),
               SizedBox(height: 24.h),
               Center(
@@ -190,7 +207,7 @@ class _RegisterUserScreenState extends State<RegisterUserScreen> {
                       ),
                       TextSpan(
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () => push(const LoginScreen(), c: context),
+                          ..onTap = () => push(const LoginScreen(), ),
                         text: LocaleKeys.my_account_log_in.tr(),
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,

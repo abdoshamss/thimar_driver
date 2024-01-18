@@ -5,11 +5,11 @@ class OrdersData {
   late final String status, message;
 
   OrdersData.fromJson(Map<String, dynamic> json) {
-    list = List.from(json['data'] ?? [])
+    list = List.from(json['data'] ??[])
         .map((e) => OrderModel.fromJson(e))
         .toList();
-    links = Links.fromJson(json['links']??{});
-    meta = Meta.fromJson(json['meta']??{});
+    links = Links.fromJson(json['links'] ?? {});
+    meta = Meta.fromJson(json['meta'] ?? {});
     status = json['status'] ?? "";
     message = json['message'] ?? "";
   }
@@ -41,7 +41,7 @@ class OrderModel {
     deliveryPrice = double.tryParse(json['delivery_price'].toString()) ?? 0;
     totalPrice = double.tryParse(json['total_price'].toString()) ?? 0;
 
-    address = Address.fromJson(json['address']??{});
+    address = Address.fromJson(json['address'] ?? {});
 
     payType = json['pay_type'] ?? "";
     phone = json['phone'] ?? "";

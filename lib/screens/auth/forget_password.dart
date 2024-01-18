@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:thimar_driver/core/widgets/pusher.dart';
 import 'package:thimar_driver/features/auth/forget_password/bloc.dart';
+import 'package:thimar_driver/generated/locale_keys.g.dart';
 import 'package:thimar_driver/screens/auth/check_code.dart';
 import 'package:thimar_driver/screens/auth/login.dart';
 
@@ -47,7 +49,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "نسيت كلمة المرور",
+                 LocaleKeys.forget_password_forget_password.tr(),
                   style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontSize: 16.sp,
@@ -57,7 +59,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   height: 12.h,
                 ),
                 Text(
-                  "أدخل رقم الجوال المرتبط بحسابك",
+                    LocaleKeys.forget_password_enter_your_phone_number.tr(),
                   style:
                       TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w400),
                 ),
@@ -69,14 +71,14 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   child: AppInput(
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "بالرجاء ادخال رقم هاتفك";
+                        return LocaleKeys.log_in_please_enter_your_mobile_number.tr();
                       } else if (value.length < 9) {
-                        return "بالرجاء ادخال ٩ ارقام";
+                        return LocaleKeys.log_in_please_enter_nine_number.tr();
                       }
                       return null;
                     },
                     controller: _bloc.phoneController,
-                    labelText: "رقم الجوال",
+                    labelText: LocaleKeys.log_in_phone_number.tr(),
                     inputType: InputType.phone,
                     prefixIcon: Assets.icons.phone.path,
                   ),
@@ -92,13 +94,13 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                               pageName: 'check',
                               phone: _bloc.phoneController.text,
                             ),
-                            c: context);
+                            );
                       }
                     },
                     bloc: _bloc,
                     builder: (context, state) => AppButton(
                         isLoading: state is ForgetPasswordLoadingState,
-                        text: "تأكيد رقم الجوال",
+                        text: LocaleKeys.forget_password_confirm_phone_number.tr(),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             _bloc.add(
@@ -114,7 +116,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       style: TextStyle(color: Theme.of(context).primaryColor),
                       children: <TextSpan>[
                         TextSpan(
-                          text: "لديك حساب بالفعل؟\t",
+                          text: "${LocaleKeys.forget_password_you_have_an_account.tr()}\t",
                           style: TextStyle(
                             fontSize: 15.sp,
                             color: Theme.of(context).primaryColor,
@@ -123,8 +125,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         TextSpan(
                           recognizer: TapGestureRecognizer()
                             ..onTap =
-                                () => push(const LoginScreen(), c: context),
-                          text: "تسجيل الدخول",
+                                () => push(const LoginScreen(), ),
+                          text: LocaleKeys.my_account_log_in.tr(),
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                           ),
